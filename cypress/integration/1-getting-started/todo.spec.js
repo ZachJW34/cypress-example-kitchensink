@@ -20,7 +20,7 @@ describe('example to-do app', () => {
     cy.visit('http://localhost:8080/todo')
   })
 
-  it('displays two todo items by default', () => {
+  it.only('displays two todo items by default', () => {
     // We use the `cy.get()` command to get all elements that match the selector.
     // Then, we use `should` to assert that there are two matched items,
     // which are the two default items.
@@ -32,6 +32,11 @@ describe('example to-do app', () => {
     // and then perform an assertion with `should`.
     cy.get('.todo-list li').first().should('have.text', 'Pay electric bill')
     cy.get('.todo-list li').last().should('have.text', 'Walk the dog')
+
+    // Run the test, verify screenshot then comment out the line below. Screenshot will still capture runner
+    // Can be reset by a browser refresh
+    Cypress.Screenshot.defaults({ capture: 'runner' })
+    cy.screenshot()
   })
 
   it('can add new todo items', () => {
